@@ -24,12 +24,12 @@ function heatconduction(a, n, T, m)
 %% 内部赋值
     for j = 2:(m + 1)
         for i = 2 : n
-            k = i + (j - 1) * (n + 1)
+            k = i + (j - 1) * (n + 1);
             u(k) = -r * u(k - n - 2) + (1 + 2 * r) * u(k - n - 1) - r * u(k - n);
         end
     end
 
-    U = print(u, m, n)
+    U = print(u, m, n);
     plot(x, U(1,:));
     
 
@@ -37,7 +37,7 @@ end
 
 function U = print(u, m, n)
     % U = rot90(reshape(u, m + 1, n + 1))
-    U = reshape(u, m + 1, n + 1)
+    U = reshape(u, m + 1, n + 1);
     
 end
 
@@ -58,7 +58,7 @@ function z = h1(t)
     % else
     %     z = 0;     
     % end
-    z = 2 + sign(t)
+    z = 2 + sign(t);
 end
     
 function z = h2(t)
@@ -69,5 +69,5 @@ function z = h2(t)
     % else
     %     z = 0;     
     % end    
-    z = 2 + sign(t)
+    z = 2 + sign(t);
 end
