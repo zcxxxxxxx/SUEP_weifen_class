@@ -17,6 +17,10 @@ for j = 1 : m + 1
     u(k + n) = R(t(j));
 end
 
+for i = 2 : n
+    u(i) = g(x(i));
+end
+
 %% 列方程
 j = 2;
 
@@ -36,7 +40,8 @@ b(L) = r * u(k + 1) + u(k - n - 1);
 
 for i = 3 : n - 1
     k = i + (j - 1) * (n + 1); % 全编号位置
-    L = i - 1 + (j - 2) * n; % 未知数位置
+%     L = i - 1 + (j - 2) * n; % 未知数位置
+    L = i - 1;
     A(L, L) = 1 + 2 * r;
     A(L, L - 1) = -r;
     A(L, L + 1) = -r;
@@ -62,7 +67,7 @@ for j = 3 : (m + 1)
 
 
     for i = 3 : n - 1
-        L = i - 1 + (j - 2) * n;
+        L = i - 1 + (j - 2) * (n - 1);
         A(L, L) = 1 + 2 * r;
         A(L, L - 1) = -r;
         A(L, L - n + 1) = -1;
@@ -71,14 +76,24 @@ for j = 3 : (m + 1)
     end
 end
 
-show_s(u,n,m)
+%% 解方程
+utemp = A \ b';
+for j = 2 : (m + 1)
+% for j = 2 : 2
+    get = utemp((j - 2) * 3 + 1: (j - 2) * 3 + (n - 1));
+    k = 2 + (j - 1) * (n + 1);
+    u(k : k + n - 2) = get;
+end
+
+
+
+
 size(A)
 size(b)
+show_s(u,n,m)
 %% 内部函数
 
-for i = 2 : n
-    u(i) = g(x(i));
-end
+
 
 function z = g(x)
 %g - Description
@@ -86,7 +101,8 @@ function z = g(x)
 % Syntax: z = g(x)
 %
 %
-    z = x; 
+    % z = x; 
+    z = 1;
 end
 
 function z = L1(t)
@@ -96,6 +112,7 @@ function z = L1(t)
 %
 % Long description
     z = sin(t);
+    z = 1;
 end
 
 function z = R(t)
@@ -105,4 +122,10 @@ function z = R(t)
 %
 % Long description
     z = cos(t);
+    z = 1;
+end
+
+function uu = show_s(u,n,m)
+    uu = reshape(u, n + 1, m + 1);
+    uu = rot90(uu);
 end
