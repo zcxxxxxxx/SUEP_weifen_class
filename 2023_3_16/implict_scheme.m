@@ -101,8 +101,9 @@ function z = g(x)
 % Syntax: z = g(x)
 %
 %
-    % z = x; 
-    z = 1;
+    z = x; 
+    % z = 1;
+    z = 0;
 end
 
 function z = L1(t)
@@ -111,8 +112,8 @@ function z = L1(t)
 % Syntax: z = L(t)
 %
 % Long description
-    z = sin(t);
-    z = 1;
+    z = -sin(t);
+    % z = 1;
 end
 
 function z = R(t)
@@ -122,8 +123,11 @@ function z = R(t)
 %
 % Long description
     z = cos(t);
-    z = 1;
+    % z = 1;
+    z = 1 - cos(t);
 end
+
+%% 辅助函数
 
 function uu = show_s(u,n,m)
     uu = reshape(u, n + 1, m + 1);
