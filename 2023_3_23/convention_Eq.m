@@ -1,17 +1,16 @@
 %% 初始化参数
-n = 20;
+n = 10;
 h = 1 / n;
 x = 0 : h : 1;
-T = 10;
-tau = 0.05;
-t = 0 : tau : T;
-a = -3;
-r = a * tau / h;
+tau = 1 / m
+t = 0 : tau : 1;
+r = tau / h;
 %% 
 
+
 %% 内置函数
-function z = g(x)
-    z = x;
+function z = f(x, t)
+    z = 0;
 end
 
 function z = L(t)
@@ -19,5 +18,9 @@ function z = L(t)
 end
 
 function z = R(t)
-    z = sin(t);
+    z = 1 - t;
+end
+
+function z = g(x)
+    z = 1;
 end
